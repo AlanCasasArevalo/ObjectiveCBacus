@@ -10,6 +10,29 @@
 
 @implementation WineModel
 
+#pragma mark - Class Methods
+
++(id) wineWithName: (NSString *) aName
+   wineCompanyName: (NSString *) awineCompanyName
+              type: (NSString *) aType
+             notes: (NSString *) aNotes
+            origin: (NSString *) anOrigin
+             photo: (UIImage *) aPhoto
+    wineCompanyWeb: (NSURL *) aWineCompanyWeb
+            grapes: (NSArray *) aGrapes
+            rating: (int) rating{
+
+    return [[self alloc] initWithName:aName wineCompanyName:awineCompanyName type:aType notes:aNotes origin:anOrigin photo:aPhoto wineCompanyWeb:aWineCompanyWeb grapes:aGrapes rating:rating];
+}
+
++(id) wineWithName: (NSString *) aName
+   wineCompanyName: (NSString *) awineCompanyName
+              type: (NSString *) aType
+            origin: (NSString *) anOrigin {
+    return [[self alloc] initWithName:aName wineCompanyName:awineCompanyName type:aType origin:anOrigin];
+}
+
+
 #pragma mark - Init
 
 -(id) initWithName: (NSString *) aName

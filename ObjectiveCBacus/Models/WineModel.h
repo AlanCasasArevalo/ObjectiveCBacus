@@ -22,6 +22,23 @@
 @property (strong, nonatomic) NSArray* grapes;
 @property (nonatomic) int rating;
 
+// Classes methods
++(id) wineWithName: (NSString *) aName
+   wineCompanyName: (NSString *) awineCompanyName
+              type: (NSString *) aType
+             notes: (NSString *) aNotes
+            origin: (NSString *) anOrigin
+             photo: (UIImage *) aPhoto
+    wineCompanyWeb: (NSURL *) aWineCompanyWeb
+            grapes: (NSArray *) aGrapes
+            rating: (int) rating;
+
++(id) wineWithName: (NSString *) aName
+   wineCompanyName: (NSString *) awineCompanyName
+              type: (NSString *) aType
+            origin: (NSString *) anOrigin;
+
+// Designed
 -(id) initWithName: (NSString *) aName
    wineCompanyName: (NSString *) awineCompanyName
               type: (NSString *) aType
