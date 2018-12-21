@@ -11,6 +11,7 @@
 		518742A321CD630500CEC0E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 518742A221CD630500CEC0E9 /* Assets.xcassets */; };
 		518742A621CD630500CEC0E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 518742A421CD630500CEC0E9 /* LaunchScreen.storyboard */; };
 		518742A921CD630500CEC0E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 518742A821CD630500CEC0E9 /* main.m */; };
+		518742D521CD6A0C00CEC0E9 /* WineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 518742D421CD6A0C00CEC0E9 /* WineModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,8 @@
 		518742A521CD630500CEC0E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		518742A721CD630500CEC0E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		518742A821CD630500CEC0E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		518742D321CD6A0C00CEC0E9 /* WineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WineModel.h; sourceTree = "<group>"; };
+		518742D421CD6A0C00CEC0E9 /* WineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WineModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +62,18 @@
 				518742A421CD630500CEC0E9 /* LaunchScreen.storyboard */,
 				518742A721CD630500CEC0E9 /* Info.plist */,
 				518742A821CD630500CEC0E9 /* main.m */,
+				518742D621CD6A1800CEC0E9 /* Models */,
 			);
 			path = ObjectiveCBacus;
+			sourceTree = "<group>";
+		};
+		518742D621CD6A1800CEC0E9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				518742D321CD6A0C00CEC0E9 /* WineModel.h */,
+				518742D421CD6A0C00CEC0E9 /* WineModel.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				518742D521CD6A0C00CEC0E9 /* WineModel.m in Sources */,
 				518742A921CD630500CEC0E9 /* main.m in Sources */,
 				518742A121CD630300CEC0E9 /* AppDelegate.m in Sources */,
 			);
