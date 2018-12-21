@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define NO_RATING -1
+
 @interface WineModel : NSObject
 
 @property (strong, nonatomic) NSString* name;
@@ -20,9 +22,19 @@
 @property (strong, nonatomic) NSArray* grapes;
 @property (nonatomic) int rating;
 
+-(id) initWithName: (NSString *) aName
+   wineCompanyName: (NSString *) awineCompanyName
+              type: (NSString *) aType
+             notes: (NSString *) aNotes
+            origin: (NSString *) anOrigin
+             photo: (UIImage *) aPhoto
+    wineCompanyWeb: (NSURL *) aWineCompanyWeb
+            grapes: (NSArray *) aGrapes
+            rating: (int) rating;
 
-
-
-
+-(id) initWithName: (NSString *) aName
+   wineCompanyName: (NSString *) awineCompanyName
+              type: (NSString *) aType
+            origin: (NSString *) anOrigin;
 
 @end
