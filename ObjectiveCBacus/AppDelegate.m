@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "WineModel.h"
 #import "WineViewController.h"
+#import "WineWebViewController.h"
 
 @interface AppDelegate ()
 
@@ -24,7 +25,7 @@
     // Creamos un modelo
     UIImage* winePhoto = [UIImage imageNamed:@"bembibre.jpg"];
     
-    NSURL* wineCompanyWeb = [NSURL URLWithString:@"http://www.dominiodetares.com/index.php/es/vinos/baltos/74-bembibrevinos"];
+    NSURL* wineCompanyWeb = [NSURL URLWithString:@"https://www.dominiodetares.com/portfolio/bembibre/"];
     
     WineModel* bembibre = [WineModel wineWithName:@"Bembibre"
                                   wineCompanyName:@"Dominio de Tares"
@@ -38,7 +39,9 @@
     
     WineViewController* wineMainController = [[WineViewController alloc] initWithModel: bembibre];
     
-    self.window.rootViewController = wineMainController;
+    WineWebViewController* webViewController = [[WineWebViewController alloc] initWithModel:bembibre];
+    
+    self.window.rootViewController = webViewController;
     
     return YES;
 }
@@ -58,3 +61,16 @@
 - (void)applicationWillTerminate:(UIApplication *)application {}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
