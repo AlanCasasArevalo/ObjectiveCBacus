@@ -33,4 +33,31 @@
     [super didReceiveMemoryWarning];
 }
 
+-(IBAction)displayWineCompanyWeb:(id)sender{
+    
+    NSLog(@"Go to %@", self.wineModel.wineCompanyWeb);
+}
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
