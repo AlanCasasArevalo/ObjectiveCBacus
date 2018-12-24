@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel* grapes;
 @property (weak, nonatomic) IBOutlet UIImageView* photoImage;
 
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray* ratingViews;
+
 @property (strong, nonatomic) WineModel* wineModel;
 
 -(id)initWithModel: (WineModel *)aModel;
