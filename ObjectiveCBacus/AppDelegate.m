@@ -38,10 +38,14 @@
                                            rating:5];
     
     WineViewController* wineMainController = [[WineViewController alloc] initWithModel: bembibre];
-    
+        
     WineWebViewController* webViewController = [[WineWebViewController alloc] initWithModel:bembibre];
+
+    UITabBarController* tabBar = [[UITabBarController alloc] init];
     
-    self.window.rootViewController = webViewController;
+    tabBar.viewControllers = @[wineMainController, webViewController];
+    
+    self.window.rootViewController = tabBar;
     
     return YES;
 }

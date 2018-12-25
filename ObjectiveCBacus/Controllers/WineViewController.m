@@ -11,6 +11,8 @@
 @implementation WineViewController
 
 -(id)initWithModel: (WineModel *)aWineModel{
+
+    self.title = aWineModel.name;
     
     self = [super initWithNibName:nil bundle:nil];
     
