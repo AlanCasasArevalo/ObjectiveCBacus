@@ -39,9 +39,9 @@
     
     WineViewController* wineMainController = [[WineViewController alloc] initWithModel: bembibre];
     
-//    WineWebViewController* webViewController = [[WineWebViewController alloc] initWithModel:bembibre];
-
     UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:wineMainController];
+    
+    navigationController.delegate = navigationController;
     
     self.window.rootViewController = navigationController;
     

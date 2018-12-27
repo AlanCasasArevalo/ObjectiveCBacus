@@ -7,6 +7,7 @@
 //
 
 #import "WineViewController.h"
+#import "WineWebViewController.h"
 
 @implementation WineViewController
 
@@ -30,6 +31,11 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self syncronizeViewWithModel];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.5
+                                                                        green:0
+                                                                         blue:0.13
+                                                                        alpha:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,6 +45,12 @@
 -(IBAction)displayWineCompanyWeb:(id)sender{
     
     NSLog(@"Go to %@", self.wineModel.wineCompanyWeb);
+    
+    WineWebViewController* wineWebVC = [[WineWebViewController alloc] initWithModel:self.wineModel];
+    
+    [self.navigationController pushViewController:wineWebVC
+                                         animated:YES];
+    
 }
 
 -(void)syncronizeViewWithModel{
