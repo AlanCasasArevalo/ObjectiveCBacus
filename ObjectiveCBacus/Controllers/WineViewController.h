@@ -11,8 +11,20 @@
 
 @interface WineViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel* nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel* wineCompanyNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel* typeLabel;
+@property (weak, nonatomic) IBOutlet UILabel* notesLabel;
+@property (weak, nonatomic) IBOutlet UILabel* originLabel;
+@property (weak, nonatomic) IBOutlet UILabel* grapes;
+@property (weak, nonatomic) IBOutlet UIImageView* photoImage;
+
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray* ratingViews;
+
 @property (strong, nonatomic) WineModel* wineModel;
 
 -(id)initWithModel: (WineModel *)aModel;
+
+-(IBAction)displayWineCompanyWeb:(id)sender;
 
 @end

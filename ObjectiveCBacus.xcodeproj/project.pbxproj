@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		516E1AFA21D0D6C90097CA39 /* WineWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 516E1AF821D0D6C90097CA39 /* WineWebViewController.m */; };
+		516E1AFB21D0D6C90097CA39 /* WineWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 516E1AF921D0D6C90097CA39 /* WineWebViewController.xib */; };
 		518742A121CD630300CEC0E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 518742A021CD630300CEC0E9 /* AppDelegate.m */; };
 		518742A321CD630500CEC0E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 518742A221CD630500CEC0E9 /* Assets.xcassets */; };
 		518742A621CD630500CEC0E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 518742A421CD630500CEC0E9 /* LaunchScreen.storyboard */; };
@@ -17,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		516E1AF721D0D6C90097CA39 /* WineWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WineWebViewController.h; sourceTree = "<group>"; };
+		516E1AF821D0D6C90097CA39 /* WineWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WineWebViewController.m; sourceTree = "<group>"; };
+		516E1AF921D0D6C90097CA39 /* WineWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WineWebViewController.xib; sourceTree = "<group>"; };
 		5187429C21CD630300CEC0E9 /* ObjectiveCBacus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjectiveCBacus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5187429F21CD630300CEC0E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		518742A021CD630300CEC0E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -88,6 +93,9 @@
 				518742D721CD744B00CEC0E9 /* WineViewController.h */,
 				518742D821CD744B00CEC0E9 /* WineViewController.m */,
 				518742D921CD744B00CEC0E9 /* WineViewController.xib */,
+				516E1AF721D0D6C90097CA39 /* WineWebViewController.h */,
+				516E1AF821D0D6C90097CA39 /* WineWebViewController.m */,
+				516E1AF921D0D6C90097CA39 /* WineWebViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -151,6 +159,7 @@
 			files = (
 				518742A321CD630500CEC0E9 /* Assets.xcassets in Resources */,
 				518742DB21CD744B00CEC0E9 /* WineViewController.xib in Resources */,
+				516E1AFB21D0D6C90097CA39 /* WineWebViewController.xib in Resources */,
 				518742A621CD630500CEC0E9 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				516E1AFA21D0D6C90097CA39 /* WineWebViewController.m in Sources */,
 				518742D521CD6A0C00CEC0E9 /* WineModel.m in Sources */,
 				518742DA21CD744B00CEC0E9 /* WineViewController.m in Sources */,
 				518742A921CD630500CEC0E9 /* main.m in Sources */,
