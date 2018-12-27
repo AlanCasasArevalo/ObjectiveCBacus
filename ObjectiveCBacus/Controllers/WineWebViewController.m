@@ -15,6 +15,9 @@
 @implementation WineWebViewController
 
 -(id) initWithModel: (WineModel*) aModel{
+    
+    self.title = @"Web";
+    
     if (self = [super initWithNibName:nil
                                bundle:nil]) {
         _wineModel = aModel;
