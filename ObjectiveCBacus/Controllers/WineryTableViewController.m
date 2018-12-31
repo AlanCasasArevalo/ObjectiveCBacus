@@ -21,6 +21,7 @@
     
     if (self) {
         _wineryModel = aWineryModel;
+        self.title = @"Baccus";
     }
     return self;
 }
@@ -29,6 +30,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.5
+                                                                           green:0
+                                                                            blue:0.13
+                                                                           alpha:1];
     
 }
 
@@ -49,7 +60,6 @@
             
         case WHITE_WINE_SECTION:
             return self.wineryModel.whiteWineCount;
-
             break;
             
         case OTHER_WINE_SECTION:
@@ -63,11 +73,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"Cell";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (cell == nil) {
         UITableViewCell* wineryCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle
-                                                            reuseIdentifier:CELL_REUSE_IDENTIFIER];
+                                                            reuseIdentifier:CellIdentifier];
     }
     
     WineModel* wineModel = nil;
@@ -95,48 +107,89 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    
+    switch (section) {
+        case RED_WINE_SECTION:
+            return @"Red wines";
+            break;
+        case WHITE_WINE_SECTION:
+            return @"White wines";
+            break;
+        case OTHER_WINE_SECTION:
+            return @"Other wines";
+            break;
+            
+        default:
+            return @"Red wines";
+            break;
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Suponemos que estamos en un navigation controller
+
+    //Averiguamos el vino
+    WineModel* wineModel = nil;
+    
+    switch (indexPath.section) {
+        case RED_WINE_SECTION:
+            wineModel = [self.wineryModel redWineAtIndex:indexPath.row];
+            break;
+            
+        case WHITE_WINE_SECTION:
+            wineModel = [self.wineryModel whiteWineAtIndex:indexPath.row];
+            break;
+            
+        case OTHER_WINE_SECTION:
+            wineModel = [self.wineryModel otherWineAtIndex:indexPath.row];
+            break;
+            
+    }
+    
+    //Creamos un controlador para el vino
+    WineViewController* wineVC = [[WineViewController alloc]initWithModel:wineModel];
+        
+    //Hacemos un push del navigation dentro del que estamos
+    [self.navigationController pushViewController:wineVC animated:true];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
