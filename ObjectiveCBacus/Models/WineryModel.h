@@ -16,7 +16,7 @@
 @property (readonly, nonatomic) int otherWineCount;
 
 -(WineryModel*) redWineAtIndex: (int) redIndex;
--(WineryModel*) whiteWineCount: (int) whiteIndex;
--(WineryModel*) otherWineCount: (int) otherIndex;
+-(WineryModel*) whiteWineAtIndex: (int) whiteIndex;
+-(WineryModel*) otherWineAtIndex: (int) otherIndex;
 
 @end

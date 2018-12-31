@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WineryModel.h"
+#import "WineModel.h"
+
+#define CELL_REUSE_IDENTIFIER @"CELLID"
+#define RED_WINE_SECTION 0
+#define WHITE_WINE_SECTION 1
+#define OTHER_WINE_SECTION 2
 
 @interface WineryTableViewController : UITableViewController
+
+@property (strong, nonatomic) WineryModel* wineryModel;
+
+-(id) initWithModel: (WineryModel *) aWineryModel
+         tableStyle: (UITableViewStyle) aTableStyle;
 
 @end

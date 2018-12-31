@@ -14,6 +14,19 @@
 
 @implementation WineryTableViewController
 
+-(id) initWithModel: (WineryModel *) aWineryModel
+         tableStyle: (UITableViewStyle) aTableStyle{
+    
+    self = [super initWithStyle:aTableStyle];
+    
+    if (self) {
+        _wineryModel = aWineryModel;
+    }
+    return self;
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -25,24 +38,62 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    switch (section) {
+        case RED_WINE_SECTION:
+            return self.wineryModel.redWineCount;
+            break;
+            
+        case WHITE_WINE_SECTION:
+            return self.wineryModel.whiteWineCount;
+
+            break;
+            
+        case OTHER_WINE_SECTION:
+            return self.wineryModel.otherWineCount;
+            break;
+            
+        default:
+            return 0;
+            break;
+    }
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_REUSE_IDENTIFIER forIndexPath:indexPath];
     
-    // Configure the cell...
+    if (cell == nil) {
+        UITableViewCell* wineryCell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle
+                                                            reuseIdentifier:CELL_REUSE_IDENTIFIER];
+    }
     
+    WineModel* wineModel = nil;
+    
+    switch (indexPath.section) {
+        case RED_WINE_SECTION:
+            wineModel = [self.wineryModel redWineAtIndex:indexPath.row];
+            break;
+        case WHITE_WINE_SECTION:
+            wineModel = [self.wineryModel whiteWineAtIndex:indexPath.row];
+            break;
+        case OTHER_WINE_SECTION:
+            wineModel = [self.wineryModel otherWineAtIndex:indexPath.row];
+            break;
+
+        default:
+            wineModel = [self.wineryModel redWineAtIndex:indexPath.row];
+            break;
+    }
+    
+    cell.imageView.image = wineModel.photo;
+    cell.textLabel.text = wineModel.name;
+    cell.detailTextLabel.text = wineModel.wineCompanyName;
+           
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

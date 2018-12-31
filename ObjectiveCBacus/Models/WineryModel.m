@@ -85,11 +85,28 @@
 -(WineryModel*) redWineAtIndex: (int) redIndex{
     return [self.redWines objectAtIndex:redIndex];
 }
--(WineryModel*) whiteWineCount: (int) whiteIndex{
+-(WineryModel*) whiteWineAtIndex: (int) whiteIndex{
     return [self.whiteWines objectAtIndex:whiteIndex];
 }
--(WineryModel*) otherWineCount: (int) otherIndex{
+-(WineryModel*) otherWineAtIndex: (int) otherIndex{
     return [self.othersWines objectAtIndex:otherIndex];
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
