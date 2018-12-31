@@ -30,17 +30,27 @@
     WineryModel* wineryModel = [[WineryModel alloc]init];
     
     /************************************************************************************
-     * Creamos el controlador
+     * Creamos los controladores
      *************************************************************************************/
     WineryTableViewController* wineryTableVC = [[WineryTableViewController alloc] initWithModel:wineryModel tableStyle:UITableViewStylePlain];
+    
+    //Creamos un controlador con un modelo por defecto (el primero de la primera seccion)
+    WineViewController* wineVC = [[WineViewController alloc]initWithModel: [wineryModel redWineAtIndex:0]];
     
     /************************************************************************************
      * Creamos el navegador
      *************************************************************************************/
     UINavigationController* wineryNC = [[UINavigationController alloc]initWithRootViewController:wineryTableVC];
+    UINavigationController* wineNC = [[UINavigationController alloc] initWithRootViewController:wineVC];
+    
+    /************************************************************************************
+     * Combinador SplitVC
+     *************************************************************************************/
+    UISplitViewController* mainSplitVC = [[UISplitViewController alloc] init];
+    mainSplitVC.viewControllers = @[wineryNC, wineNC];
     
     
-    self.window.rootViewController = wineryNC;
+    self.window.rootViewController = mainSplitVC;
     
     return YES;
 }
