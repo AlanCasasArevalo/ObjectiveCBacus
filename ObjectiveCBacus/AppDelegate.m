@@ -33,8 +33,6 @@
      * Creamos los controladores
      *************************************************************************************/
     WineryTableViewController* wineryTableVC = [[WineryTableViewController alloc] initWithModel:wineryModel tableStyle:UITableViewStylePlain];
-    
-    //Creamos un controlador con un modelo por defecto (el primero de la primera seccion)
     WineViewController* wineVC = [[WineViewController alloc]initWithModel: [wineryModel redWineAtIndex:0]];
     
     /************************************************************************************
@@ -49,6 +47,10 @@
     UISplitViewController* mainSplitVC = [[UISplitViewController alloc] init];
     mainSplitVC.viewControllers = @[wineryNC, wineNC];
     
+    /************************************************************************************
+     * Asignar delegados
+     *************************************************************************************/    
+    mainSplitVC.delegate = wineVC;
     
     self.window.rootViewController = mainSplitVC;
     
