@@ -102,14 +102,16 @@
 - (void)splitViewController:(UISplitViewController *)svc
     willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode {
     
-    //    UISplitViewControllerDisplayModeAutomatic
-    //    UISplitViewControllerDisplayModePrimaryHidden
-    //    UISplitViewControllerDisplayModeAllVisible
-    //    UISplitViewControllerDisplayModePrimaryOverlay
     
-    if (displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
+//    UISplitViewControllerDisplayModeAutomatic,
+//    UISplitViewControllerDisplayModePrimaryHidden,
+//    UISplitViewControllerDisplayModeAllVisible,
+//    UISplitViewControllerDisplayModePrimaryOverlay,
+
+    
+    if (displayMode == UISplitViewControllerDisplayModeAutomatic || displayMode  ==  UISplitViewControllerDisplayModePrimaryHidden || displayMode == UISplitViewControllerDisplayModePrimaryOverlay) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Baccus" style:UIBarButtonItemStylePlain target:self.splitViewController.displayModeButtonItem.target action:self.splitViewController.displayModeButtonItem.action];
-    }else if (displayMode == UISplitViewControllerDisplayModeAllVisible) {
+    } else if (displayMode == UISplitViewControllerDisplayModeAllVisible) {
         self.navigationItem.rightBarButtonItem = nil;
     }
     
