@@ -7,6 +7,7 @@
 //
 
 #import "WineryTableViewController.h"
+#import "WineViewController.h"
 
 @interface WineryTableViewController ()
 
@@ -128,10 +129,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Suponemos que estamos en un navigation controller
-
+    
     //Averiguamos el vino
     WineModel* wineModel = nil;
-    
     switch (indexPath.section) {
         case RED_WINE_SECTION:
             wineModel = [self.wineryModel redWineAtIndex:indexPath.row];
@@ -144,17 +144,19 @@
         case OTHER_WINE_SECTION:
             wineModel = [self.wineryModel otherWineAtIndex:indexPath.row];
             break;
-            
     }
     
-    //Creamos un controlador para el vino
-    WineViewController* wineVC = [[WineViewController alloc]initWithModel:wineModel];
-        
-    //Hacemos un push del navigation dentro del que estamos
-    [self.navigationController pushViewController:wineVC animated:true];
+    [self.delegate wineryTableViewController:self didSelectedWine:wineModel];
+    
 }
 
-
+-(void) wineryTableViewController: (WineryTableViewController*) wineryVC
+                  didSelectedWine:(WineModel*) aWineModel{
+    
+    WineViewController* wineVC = [[WineViewController alloc] initWithModel:aWineModel];
+    
+    [self.navigationController pushViewController:wineVC animated:YES];
+}
 
 @end
 

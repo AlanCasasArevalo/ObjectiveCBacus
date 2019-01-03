@@ -28,7 +28,6 @@
     [super viewDidLoad];
     if (self.splitViewController.displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Baccus" style:UIBarButtonItemStylePlain target:self.splitViewController.displayModeButtonItem.target action:self.splitViewController.displayModeButtonItem.action];
-        
     }
 }
 
@@ -117,6 +116,16 @@
     
 }
 
+-(void) wineryTableViewController: (WineryTableViewController*) wineryVC
+                  didSelectedWine:(WineModel*) aWineModel{
+    
+    self.wineModel = aWineModel;
+    
+    self.title = aWineModel.name;
+    
+    [self syncronizeViewWithModel];
+    
+}
 
 
 @end

@@ -51,6 +51,7 @@
      * Asignar delegados
      *************************************************************************************/    
     mainSplitVC.delegate = wineVC;
+    wineryTableVC.delegate = wineVC;
     
     self.window.rootViewController = mainSplitVC;
     
