@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WineViewController.h"
 #import "WineryModel.h"
 #import "WineModel.h"
 
@@ -15,11 +14,21 @@
 #define WHITE_WINE_SECTION 1
 #define OTHER_WINE_SECTION 2
 
-@interface WineryTableViewController : UITableViewController
+@class WineryTableViewController;
+
+@protocol WineryTableViewControllerDelegate <NSObject>
+-(void)wineryTableViewController:(WineryTableViewController*)wineryVC
+                 didSelectedWine:(WineModel*)aWineModel;
+@end
+
+@interface WineryTableViewController : UITableViewController <WineryTableViewControllerDelegate>
 
 @property (strong, nonatomic) WineryModel* wineryModel;
+@property (weak, nonatomic) id <WineryTableViewControllerDelegate> delegate;
 
 -(id) initWithModel: (WineryModel *) aWineryModel
          tableStyle: (UITableViewStyle) aTableStyle;
 
 @end
+
+
