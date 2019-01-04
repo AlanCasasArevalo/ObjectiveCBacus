@@ -148,6 +148,16 @@
     
     [self.delegate wineryTableViewController:self didSelectedWine:wineModel];
     
+    NSDictionary* wineDictionary = [[NSDictionary alloc]init];
+    
+    wineDictionary = @{WINE_KEY: wineModel};
+    
+    NSNotification* notification = [NSNotification notificationWithName:WINE_NOTIFICATION_SELECTED
+                                                                     object:self
+                                                                   userInfo:wineDictionary];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
 }
 
 -(void) wineryTableViewController: (WineryTableViewController*) wineryVC

@@ -30,6 +30,30 @@
     
     [self displayWineWeb: self.wineModel.wineCompanyWeb];
     
+    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+    
+    [center addObserver:self
+               selector:@selector(wineDidChanged:)
+                   name:WINE_NOTIFICATION_SELECTED
+                 object:nil];
+}
+
+-(void)wineDidChanged: (NSNotification*) notification {
+    
+    NSDictionary* myWineModelDictionary = [notification userInfo];
+    
+    WineModel* wineModelUpdated = [myWineModelDictionary objectForKey:WINE_KEY];
+    
+    self.wineModel = wineModelUpdated;
+    
+    [self displayWineWeb: self.wineModel.wineCompanyWeb];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

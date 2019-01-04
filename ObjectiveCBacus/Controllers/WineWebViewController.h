@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "WineModel.h"
+#import "WineryTableViewController.h"
 
 @interface WineWebViewController : UIViewController <UIWebViewDelegate>
 
