@@ -152,11 +152,12 @@
     
     wineDictionary = @{WINE_KEY: wineModel};
     
-    NSNotification* notification = [NSNotification notificationWithName:WINE_NOTIFICATION_SELECTED
+    NSNotification* notification = [NSNotification notificationWithName:DID_SELECT_WINE_NOTIFICATION_NAME
                                                                      object:self
                                                                    userInfo:wineDictionary];
     
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+    [self saveLastSelectedWineAtIndexSection:indexPath.section row:indexPath.row];
     
 }
 
@@ -166,6 +167,75 @@
     WineViewController* wineVC = [[WineViewController alloc] initWithModel:aWineModel];
     
     [self.navigationController pushViewController:wineVC animated:YES];
+}
+
+-(void)saveLastSelectedWineAtIndexSection:(NSUInteger)section row:(NSUInteger)row{
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setObject:@{SECTION_KEY : @(section),
+                          ROW_KEY     : @(row)}
+                 forKey:LAST_WINE_KEY];
+    
+    [defaults synchronize];
+    
+}
+
+-(WineModel*)lastSelectedWine{
+    
+    NSIndexPath* index = nil;
+    
+    NSDictionary* coords = nil;
+    
+    coords = [[NSUserDefaults standardUserDefaults]objectForKey:LAST_WINE_KEY];
+    
+    if (coords == nil){
+        coords = [self setDefaults];
+    }
+    
+    index = [NSIndexPath indexPathForRow:[[coords objectForKey:ROW_KEY]integerValue]
+                               inSection:[[coords objectForKey:SECTION_KEY]integerValue]];
+    
+    return [self wineForIndexPath:index];
+}
+
+-(NSDictionary*) setDefaults{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    //Con la sintaxis @Int hacemos que el numero se quede empaquetado en un nsnumber
+    NSDictionary* defaultWineCoordinates = @{SECTION_KEY: @(RED_WINE_SECTION),
+                                             ROW_KEY:@0};
+    
+    [defaults setObject:defaultWineCoordinates
+                 forKey:LAST_WINE_KEY];
+    
+    [defaults synchronize];
+    
+    return defaultWineCoordinates;
+}
+
+-(WineModel*)wineForIndexPath:(NSIndexPath*)indexPath{
+    
+    WineModel* wineIndex = nil;
+    
+    switch (indexPath.section) {
+        case RED_WINE_SECTION:
+            wineIndex = [self.wineryModel redWineAtIndex:indexPath.row];
+            break;
+            
+        case WHITE_WINE_SECTION:
+            wineIndex = [self.wineryModel whiteWineAtIndex:indexPath.row];
+            break;
+            
+        case OTHER_WINE_SECTION:
+            wineIndex = [self.wineryModel otherWineAtIndex:indexPath.row];
+            break;
+            
+        default:
+            break;
+    }
+    return wineIndex;
+    
 }
 
 @end

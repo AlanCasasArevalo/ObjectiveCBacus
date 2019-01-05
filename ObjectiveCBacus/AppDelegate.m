@@ -33,7 +33,7 @@
      * Creamos los controladores
      *************************************************************************************/
     WineryTableViewController* wineryTableVC = [[WineryTableViewController alloc] initWithModel:wineryModel tableStyle:UITableViewStylePlain];
-    WineViewController* wineVC = [[WineViewController alloc]initWithModel: [wineryModel redWineAtIndex:0]];
+    WineViewController* wineVC = [[WineViewController alloc]initWithModel: [wineryTableVC lastSelectedWine]];
     
     /************************************************************************************
      * Creamos el navegador

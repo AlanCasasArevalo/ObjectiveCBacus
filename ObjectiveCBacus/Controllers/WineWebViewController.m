@@ -34,7 +34,7 @@
     
     [center addObserver:self
                selector:@selector(wineDidChanged:)
-                   name:WINE_NOTIFICATION_SELECTED
+                   name:DID_SELECT_WINE_NOTIFICATION_NAME
                  object:nil];
 }
 
