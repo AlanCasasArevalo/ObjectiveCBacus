@@ -63,10 +63,11 @@
             return self.wineryModel.whiteWineCount;
             break;
             
-        case OTHER_WINE_SECTION:
-            return self.wineryModel.otherWineCount;
-            break;
+        case ROSE_WINE_SECTION:
+            return self.wineryModel.roseWineCount;
             
+        case CHAMPAGNE_WINE_SECTION:
+            return self.wineryModel.champagneWineCount;
         default:
             return 0;
             break;
@@ -75,7 +76,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (cell == nil) {
@@ -92,8 +93,11 @@
         case WHITE_WINE_SECTION:
             wineModel = [self.wineryModel whiteWineAtIndex:indexPath.row];
             break;
-        case OTHER_WINE_SECTION:
-            wineModel = [self.wineryModel otherWineAtIndex:indexPath.row];
+        case ROSE_WINE_SECTION:
+            wineModel = [self.wineryModel roseWineAtIndex:indexPath.row];
+            break;
+        case CHAMPAGNE_WINE_SECTION:
+            wineModel = [self.wineryModel champagneWineAtIndex:indexPath.row];
             break;
 
         default:
@@ -101,10 +105,10 @@
             break;
     }
     
-    cell.imageView.image = wineModel.photo;
+    cell.imageView.image = wineModel.winePhoto;
     cell.textLabel.text = wineModel.name;
     cell.detailTextLabel.text = wineModel.wineCompanyName;
-           
+    
     return cell;
 }
 
@@ -117,8 +121,11 @@
         case WHITE_WINE_SECTION:
             return @"White wines";
             break;
-        case OTHER_WINE_SECTION:
-            return @"Other wines";
+        case ROSE_WINE_SECTION:
+            return @"Rose wines";
+            break;
+        case CHAMPAGNE_WINE_SECTION:
+            return @"Champagne wines";
             break;
             
         default:
@@ -141,8 +148,12 @@
             wineModel = [self.wineryModel whiteWineAtIndex:indexPath.row];
             break;
             
-        case OTHER_WINE_SECTION:
-            wineModel = [self.wineryModel otherWineAtIndex:indexPath.row];
+        case ROSE_WINE_SECTION:
+            wineModel = [self.wineryModel roseWineAtIndex:indexPath.row];
+            break;
+
+        case CHAMPAGNE_WINE_SECTION:
+            wineModel = [self.wineryModel champagneWineAtIndex:indexPath.row];
             break;
     }
     
@@ -153,8 +164,8 @@
     wineDictionary = @{WINE_KEY: wineModel};
     
     NSNotification* notification = [NSNotification notificationWithName:DID_SELECT_WINE_NOTIFICATION_NAME
-                                                                     object:self
-                                                                   userInfo:wineDictionary];
+                                                                 object:self
+                                                               userInfo:wineDictionary];
     
     [[NSNotificationCenter defaultCenter] postNotification:notification];
     [self saveLastSelectedWineAtIndexSection:indexPath.section row:indexPath.row];
@@ -227,8 +238,12 @@
             wineIndex = [self.wineryModel whiteWineAtIndex:indexPath.row];
             break;
             
-        case OTHER_WINE_SECTION:
-            wineIndex = [self.wineryModel otherWineAtIndex:indexPath.row];
+        case ROSE_WINE_SECTION:
+            wineIndex = [self.wineryModel roseWineAtIndex:indexPath.row];
+            break;
+            
+        case CHAMPAGNE_WINE_SECTION:
+            wineIndex = [self.wineryModel champagneWineAtIndex:indexPath.row];
             break;
             
         default:
