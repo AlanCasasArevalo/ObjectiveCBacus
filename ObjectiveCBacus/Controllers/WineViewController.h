@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "WineModel.h"
+#import "WineryTableViewController.h"
 
-@interface WineViewController : UIViewController
+@interface WineViewController : UIViewController <UISplitViewControllerDelegate, WineryTableViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel* nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel* wineCompanyNameLabel;

@@ -12,7 +12,7 @@
 @implementation WineViewController
 
 -(id)initWithModel: (WineModel *)aWineModel{
-
+    
     self.title = aWineModel.name;
     
     self = [super initWithNibName:nil bundle:nil];
@@ -26,6 +26,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (self.splitViewController.displayMode == UISplitViewControllerDisplayModePrimaryHidden) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Baccus" style:UIBarButtonItemStylePlain target:self.splitViewController.displayModeButtonItem.target action:self.splitViewController.displayModeButtonItem.action];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -33,9 +36,9 @@
     [self syncronizeViewWithModel];
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.5
-                                                                        green:0
-                                                                         blue:0.13
-                                                                        alpha:1];
+                                                                           green:0
+                                                                            blue:0.13
+                                                                           alpha:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +96,37 @@
         imageView.image = nil;
     }
 }
+
+#pragma mark - UISplitViewControllerDelegate
+- (void)splitViewController:(UISplitViewController *)svc
+    willChangeToDisplayMode:(UISplitViewControllerDisplayMode)displayMode {
+    
+    
+//    UISplitViewControllerDisplayModeAutomatic,
+//    UISplitViewControllerDisplayModePrimaryHidden,
+//    UISplitViewControllerDisplayModeAllVisible,
+//    UISplitViewControllerDisplayModePrimaryOverlay,
+
+    
+    if (displayMode == UISplitViewControllerDisplayModeAutomatic || displayMode  ==  UISplitViewControllerDisplayModePrimaryHidden || displayMode == UISplitViewControllerDisplayModePrimaryOverlay) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Baccus" style:UIBarButtonItemStylePlain target:self.splitViewController.displayModeButtonItem.target action:self.splitViewController.displayModeButtonItem.action];
+    } else if (displayMode == UISplitViewControllerDisplayModeAllVisible) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
+}
+
+-(void) wineryTableViewController: (WineryTableViewController*) wineryVC
+                  didSelectedWine:(WineModel*) aWineModel{
+    
+    self.wineModel = aWineModel;
+    
+    self.title = aWineModel.name;
+    
+    [self syncronizeViewWithModel];
+    
+}
+
 
 @end
 
