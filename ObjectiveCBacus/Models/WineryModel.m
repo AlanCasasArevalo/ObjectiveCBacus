@@ -10,87 +10,123 @@
 
 @interface WineryModel ()
 
-@property (strong, nonatomic) NSArray* redWines;
-@property (strong, nonatomic) NSArray* whiteWines;
-@property (strong, nonatomic) NSArray* othersWines;
+@property (strong, nonatomic) NSMutableArray* redWines;
+@property (strong, nonatomic) NSMutableArray* whiteWines;
+@property (nonatomic,strong) NSMutableArray* champagneWines;
+@property (nonatomic,strong) NSMutableArray* roseWines;
 
 @end
 
 @implementation WineryModel
 
--(int) redWineCount {
+-(NSUInteger) redWineCount {
     return [self.redWines count];
 }
 
--(int) whiteWineCount {
+-(NSUInteger) whiteWineCount {
     return [self.whiteWines count];
 }
 
--(int) otherWineCount {
-    return [self.othersWines count];
+-(NSUInteger) champagneWineCount {
+    return [self.champagneWines count];
 }
+
+-(NSUInteger) roseWineCount {
+    return [self.roseWines count];
+}
+
 
 -(id) init {
     if (self = [super init]) {
         
-        // Creamos un modelo
-        UIImage* bembibrePhoto = [UIImage imageNamed:@"bembibre.jpg"];
-        UIImage* albarinoPhoto = [UIImage imageNamed:@"zarate.jpg"];
-        UIImage* guzmanPhoto = [UIImage imageNamed:@"guzman.jpg"];
+        NSError* customError = nil;
+        NSString* errorDefaultMessage = @"Ha habido un error al intentar hacer la conversion de JSON e inicializarlo dentro de los vinos";
         
-        NSURL* bembibreCompanyWeb = [NSURL URLWithString:@"https://www.dominiodetares.com/portfolio/bembibre/"];
-        NSURL* albarinoCompanyWeb = [NSURL URLWithString:@"https://www.bodeboca.com/vino/zarate-tras-da-vina-2015"];
-        NSURL* guzmanCompanyWeb = [NSURL URLWithString:@"https://www.vinopremier.com/vino-rosado-raiz-de-guzman-2015.html"];
+        NSString* urlString = @"http://static.keepcoding.io/baccus/wines.json";
         
-        WineModel* bembibre = [WineModel wineWithName:@"Bembibre"
-                                      wineCompanyName:@"Dominio de Tares"
-                                                 type:@"tinto"
-                                                notes:@"Este vino muestra toda la complejidad y la elegancia de la variedad Mencía. En fase visual luce un color rojo picota muy cubierto con tonalidades violáceas en el menisco. En nariz aparecen recuerdos frutales muy intensos de frutas rojas (frambuesa, cereza) y una potente ciruela negra, así como tonos florales de la gama de las rosas y violetas, vegetales muy elegantes y complementarios, hojarasca verde, tabaco y maderas aromáticas (sándalo) que le brindan un toque ciertamente perfumado."
-                                               origin:@"El Bierzo"
-                                                photo:bembibrePhoto
-                                       wineCompanyWeb:bembibreCompanyWeb
-                                               grapes:@[@"Mencía"]
-                                               rating:5];
+        NSURL* url = [NSURL URLWithString:urlString];
         
+        NSData* dataJsonResult = [NSData dataWithContentsOfURL:url];
         
-        WineModel* albarino = [WineModel wineWithName:@"Zarate"
-                                      wineCompanyName:@"Zarate"
-                                                 type:@"Blanco"
-                                                notes:@"El albariño Zarate es un vino blanco monovarietal que pertenece a la Denominación de Origen Rías Baixas. Considerado por la crítica especializada como uno de los grandes vinos blancos del mundo, el albariño ya es todo un mito."
-                                               origin:@"Rias Bajas"
-                                                photo:albarinoPhoto
-                                       wineCompanyWeb:albarinoCompanyWeb
-                                               grapes:@[@"Albariño"]
-                                               rating:5];
-        
-        WineModel* guzman = [WineModel wineWithName:@"Raiz de Guzman"
-                                    wineCompanyName:@"Raiz de Guzman"
-                                               type:@"Rosado"
-                                              notes:@"Raíz de Guzmán son vinos con denominación de origen Ribera del Duero elaborados con uva 100% tempranillo en la localidad burgalesa de Roa de Duero. Tradición e innovación se funden en su elaboración y se traducen, al término del proceso, en productos exclusivos y de altísima calidad, la seña de identidad de la casa."
-                                             origin:@"Ribera del Duero"
-                                              photo:guzmanPhoto
-                                     wineCompanyWeb:guzmanCompanyWeb
-                                             grapes:@[@"Chardonnay"]
-                                             rating:5];
-        
-        self.redWines = @[bembibre];
-        self.whiteWines = @[albarino];
-        self.othersWines = @[guzman];
+        if (!dataJsonResult) {
+            customError = [NSError errorWithDomain:@"Baccus.Model"
+                                              code:42
+                                          userInfo:@{NSLocalizedDescriptionKey: errorDefaultMessage}];
+        } else {
+            if (dataJsonResult != nil) {
+                
+                NSArray* JSONObjects = [NSJSONSerialization JSONObjectWithData:dataJsonResult
+                                                                       options:nil
+                                                                         error:&customError];
+                
+                if (JSONObjects != nil) {
+                    
+                    NSDictionary *jsonWineDictionary = nil;
+                    
+                    for (jsonWineDictionary in JSONObjects) {
+                        
+                        WineModel* wineFromJson = [[WineModel alloc]initWithDictionary: jsonWineDictionary];
+                        
+                        if (wineFromJson.name != nil) {
+                            
+                            if ([wineFromJson.type isEqualToString:RED_WINE_KEY]) {
+                                if (!self.redWines){
+                                    self.redWines = [NSMutableArray arrayWithObject:wineFromJson];
+                                }else{
+                                    [self.redWines addObject:wineFromJson];
+                                }
+                            } else if ([wineFromJson.type isEqualToString:WHITE_WINE_KEY]) {
+                                if (!self.whiteWines){
+                                    self.whiteWines = [NSMutableArray arrayWithObject:wineFromJson];
+                                }else{
+                                    [self.whiteWines addObject:wineFromJson];
+                                }
+                            } else if ([wineFromJson.type isEqualToString: ROSE_WINE_KEY]) {
+                                if (!self.roseWines){
+                                    self.roseWines = [NSMutableArray arrayWithObject:wineFromJson];
+                                }else{
+                                    [self.roseWines addObject:wineFromJson];
+                                }
+                            } else if ([wineFromJson.type isEqualToString:CHAMPAGNE_WINE_KEY]) {
+                                if (!self.champagneWines){
+                                    self.champagneWines = [NSMutableArray arrayWithObject:wineFromJson];
+                                }else{
+                                    [self.champagneWines addObject:wineFromJson];
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                } else {
+                    NSLog(@"Lo sentimos ha habido un error al parsear el JSON %@", customError.localizedDescription);
+                }
+                
+            } else {
+                
+                //Error al descargar
+                NSLog(@"Lo sentimos ha habido un error al descargar %@", customError.localizedDescription);
+            }
+        }
         
     }
     
     return self;
 }
 
--(WineryModel*) redWineAtIndex: (int) redIndex{
+-(WineryModel*) redWineAtIndex: (NSUInteger) redIndex{
     return [self.redWines objectAtIndex:redIndex];
 }
--(WineryModel*) whiteWineAtIndex: (int) whiteIndex{
+-(WineryModel*) whiteWineAtIndex: (NSUInteger) whiteIndex{
     return [self.whiteWines objectAtIndex:whiteIndex];
 }
--(WineryModel*) otherWineAtIndex: (int) otherIndex{
-    return [self.othersWines objectAtIndex:otherIndex];
+-(WineryModel*) roseWineAtIndex: (NSUInteger) roseIndex{
+    return [self.roseWines objectAtIndex:roseIndex];
 }
+-(WineryModel*) champagneWineAtIndex: (NSUInteger) champagneIndex{
+    return [self.champagneWines objectAtIndex:champagneIndex];
+}
+
 
 @end
 

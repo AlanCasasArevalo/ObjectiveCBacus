@@ -64,7 +64,7 @@
     self.notesLabel.text = self.wineModel.notes;
     self.originLabel.text = self.wineModel.origin;
     self.grapes.text = [self arrayToString: self.wineModel.grapes];
-    self.photoImage.image = self.wineModel.photo;
+    self.photoImage.image = self.wineModel.winePhoto;
     [self displayRating: self.wineModel.rating];
     
 }
