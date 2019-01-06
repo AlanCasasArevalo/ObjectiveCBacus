@@ -60,11 +60,14 @@
     [super didReceiveMemoryWarning];
 }
 
--(void)displayWineWeb: (NSURL *) anUrl{
+-(void)displayWineWeb: (NSString *) anUrlString{
 
     self.wineBrowser.delegate = self;
     
-    NSURLRequest* wineRequest = [NSURLRequest requestWithURL: anUrl];
+    NSURL *url = [NSURL URLWithString:anUrlString];
+    
+    NSURLRequest* wineRequest = [NSURLRequest requestWithURL: url];
+    
     [self startActivityIndicator];
     [self.wineBrowser loadRequest:wineRequest];
 }

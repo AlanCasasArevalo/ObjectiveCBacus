@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSString* notes;
 @property (strong, nonatomic) NSString* origin;
 @property (strong, nonatomic) UIImage* winePhoto;
-@property (strong, nonatomic) NSURL* wineCompanyWeb;
+@property (strong, nonatomic) NSString* wineCompanyWeb;
 @property (strong, nonatomic) NSArray* grapes;
 @property (nonatomic,strong) NSURL* photoURL;
 @property (nonatomic) int rating;
@@ -29,7 +29,7 @@
               type: (NSString *) aType
              notes: (NSString *) aNotes
             origin: (NSString *) anOrigin
-    wineCompanyWeb: (NSURL *) aWineCompanyWeb
+    wineCompanyWeb: (NSString *) aWineCompanyWeb
             grapes: (NSArray *) aGrapes
             rating: (int) rating
           photoURL:(NSURL*)aPhotoURL;
@@ -46,7 +46,7 @@
               type: (NSString *) aType
              notes: (NSString *) aNotes
             origin: (NSString *) anOrigin
-    wineCompanyWeb: (NSURL *) aWineCompanyWeb
+    wineCompanyWeb: (NSString *) aWineCompanyWeb
             grapes: (NSArray *) aGrapes
             rating: (int) rating
          photoURL:(NSURL*)aPhotoURL;

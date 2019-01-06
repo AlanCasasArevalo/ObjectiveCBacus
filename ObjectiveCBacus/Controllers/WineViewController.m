@@ -49,10 +49,18 @@
     
     NSLog(@"Go to %@", self.wineModel.wineCompanyWeb);
     
-    WineWebViewController* wineWebVC = [[WineWebViewController alloc] initWithModel:self.wineModel];
-    
-    [self.navigationController pushViewController:wineWebVC
-                                         animated:YES];
+    if (self.wineModel.wineCompanyWeb) {
+        WineWebViewController* wineWebVC = [[WineWebViewController alloc] initWithModel:self.wineModel];
+        
+        [self.navigationController pushViewController:wineWebVC
+                                             animated:YES];
+
+    } else {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Lo sentimos esta web no esta disponible" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
     
 }
 
