@@ -28,32 +28,19 @@
      * Creamos modelo
      *************************************************************************************/
     WineryModel* wineryModel = [[WineryModel alloc]init];
-    
+
     /************************************************************************************
-     * Creamos los controladores
+     * Creamos un Controllador por defecto vacio
      *************************************************************************************/
-    WineryTableViewController* wineryTableVC = [[WineryTableViewController alloc] initWithModel:wineryModel tableStyle:UITableViewStylePlain];
-    WineViewController* wineVC = [[WineViewController alloc]initWithModel: [wineryTableVC lastSelectedWine]];
+    UIViewController* rootVC = nil;
     
-    /************************************************************************************
-     * Creamos el navegador
-     *************************************************************************************/
-    UINavigationController* wineryNC = [[UINavigationController alloc]initWithRootViewController:wineryTableVC];
-    UINavigationController* wineNC = [[UINavigationController alloc] initWithRootViewController:wineVC];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        rootVC = [self rootViewControllerForPadWithModel:wineryModel];
+    } else {
+        rootVC = [self rootViewControllerForPhoneWithModel:wineryModel];
+    }
     
-    /************************************************************************************
-     * Combinador SplitVC
-     *************************************************************************************/
-    UISplitViewController* mainSplitVC = [[UISplitViewController alloc] init];
-    mainSplitVC.viewControllers = @[wineryNC, wineNC];
-    
-    /************************************************************************************
-     * Asignar delegados
-     *************************************************************************************/    
-    mainSplitVC.delegate = wineVC;
-    wineryTableVC.delegate = wineVC;
-    
-    self.window.rootViewController = mainSplitVC;
+    self.window.rootViewController = rootVC;
     
     return YES;
 }
@@ -71,6 +58,45 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {}
+
+#pragma mark - iPhone Controller
+-(UIViewController*)rootViewControllerForPhoneWithModel:(WineryModel*) aModel{
+    WineryTableViewController* wineryVC = [[WineryTableViewController alloc] initWithModel:aModel tableStyle:UITableViewStylePlain];
+    UINavigationController* wineryNavVC = [[UINavigationController alloc]initWithRootViewController:wineryVC];
+    wineryVC.delegate = wineryVC;
+    return wineryNavVC;
+}
+
+#pragma mark - iPad Controller
+-(UIViewController*)rootViewControllerForPadWithModel:(WineryModel*)aModel{
+    /************************************************************************************
+     * Creamos los controladores
+     *************************************************************************************/
+    WineryTableViewController* wineryTableVC = [[WineryTableViewController alloc] initWithModel:aModel tableStyle:UITableViewStylePlain];
+    WineViewController* wineVC = [[WineViewController alloc]initWithModel: [wineryTableVC lastSelectedWine]];
+    
+    /************************************************************************************
+     * Creamos el navegador
+     *************************************************************************************/
+    UINavigationController* wineryNC = [[UINavigationController alloc]initWithRootViewController:wineryTableVC];
+    UINavigationController* wineNC = [[UINavigationController alloc] initWithRootViewController:wineVC];
+    
+    /************************************************************************************
+     * Combinador SplitVC
+     *************************************************************************************/
+    UISplitViewController* mainSplitVC = [[UISplitViewController alloc] init];
+    mainSplitVC.viewControllers = @[wineryNC, wineNC];
+    
+    /************************************************************************************
+     * Asignar delegados
+     *************************************************************************************/
+    mainSplitVC.delegate = wineVC;
+    wineryTableVC.delegate = wineVC;
+    
+    return mainSplitVC;
+    
+}
+
 
 @end
 
